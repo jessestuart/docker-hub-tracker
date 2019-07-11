@@ -1,12 +1,15 @@
+import axios from 'axios'
 import _ from 'lodash'
 import fp from 'lodash/fp'
 
-import API from './api'
-import RepositoryDetails from './types/RepositoryDetails'
-
-const api = new API()
-
 const NUM_REPOS_TO_ANALYZE = 20
+const USERNAME = 'jessestuart'
+const QUERY_PARAMS = {
+  params: {
+    page: 1,
+    page_size: NUM_REPOS_TO_ANALYZE,
+  },
+}
 
 interface QueryOptions {
   username: string
@@ -14,6 +17,7 @@ interface QueryOptions {
 
 interface RepoFields {
   description: string
+  last_updated: string
   name: string
   pull_count: number
   star_count: number
@@ -27,14 +31,12 @@ interface DHStatsReponse {
 export const queryRepos = async ({
   username,
 }: QueryOptions): Promise<DHStatsReponse> => {
-  const repos = await api.repositories(username)
-  const repoDetails: RepositoryDetails[] = await Promise.all(
-    repos.map(({ namespace, name }) => api.repository(namespace, name)),
+  const repos = await axios.get(
+    `https://hub.docker.com/v2/repositories/${username}`,
+    QUERY_PARAMS,
   )
-
   const topRepos: RepoFields[] = _.flow(
-    fp.orderBy('pull_count', 'desc'),
-    fp.take(NUM_REPOS_TO_ANALYZE),
+    fp.get('data.results'),
     fp.map(
       fp.pick([
         'description',
@@ -44,14 +46,12 @@ export const queryRepos = async ({
         'star_count',
       ]),
     ),
-  )(repoDetails) as RepoFields[]
-
-  const totalPulls = _.sumBy(repoDetails, 'pull_count')
+  )(repos) as RepoFields[]
+  const totalPulls: number = _.sumBy(topRepos, 'pull_count')
 
   return { topRepos, totalPulls }
 }
 
-const USERNAME = 'jessestuart'
 queryRepos({ username: USERNAME })
   .then(({ topRepos, totalPulls }) => {
     console.log({ topRepos, totalPulls })

@@ -3,7 +3,7 @@ import _ from 'lodash'
 import fp from 'lodash/fp'
 
 const NUM_REPOS_TO_ANALYZE = 20
-const USERNAME = 'jessestuart'
+// const USERNAME = 'jessestuart'
 const QUERY_PARAMS = {
   params: {
     page: 1,
@@ -52,8 +52,8 @@ export const queryRepos = async ({
   return { topRepos, totalPulls }
 }
 
-queryRepos({ username: USERNAME })
-  .then(({ topRepos, totalPulls }) => {
-    console.log({ topRepos, totalPulls })
-  })
-  .catch(console.error)
+// queryRepos({ username: USERNAME })
+//   .then(({ topRepos, totalPulls }) => {
+//     console.log({ topRepos, totalPulls })
+//   })
+//   .catch(console.error)

@@ -18,10 +18,10 @@ export const popuplateDynamoWithQueryResults = ({
 
     const isDescriptionAvailable = !_.isEmpty(description)
     let UpdateExpression = `
-          set
-            STAR_COUNT=:star_count,
-            PULL_COUNT=:pull_count,
-            LAST_UPDATED=:last_updated`
+      set
+        STAR_COUNT=:star_count,
+        PULL_COUNT=:pull_count,
+        LAST_UPDATED=:last_updated`
     const ExpressionAttributeValues = {
       ':last_updated': last_updated,
       ':pull_count': pull_count,

@@ -1,12 +1,15 @@
-import { popuplateDynamoWithQueryResults } from './aws/populate-dynamodb'
+import _ from 'lodash'
+
 import { queryReposForUser } from './services/docker-hub'
+import { popuplateDynamoWithQueryResults } from './services/dynamodb'
 
 queryReposForUser({ username: 'jessestuart' })
   .then(async ({ topRepos, totalPulls }) => {
-    const results = await popuplateDynamoWithQueryResults({
-      topRepos,
-    })
-    console.log({ results })
+    console.log('Top repos:', _.orderBy(topRepos, 'pull_count', 'desc'))
+    console.log('Total pulls: ', { totalPulls })
+
+    await popuplateDynamoWithQueryResults({ topRepos })
+
     return { topRepos, totalPulls }
   })
   .catch(err => {

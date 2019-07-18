@@ -2,8 +2,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import fp from 'lodash/fp'
 
-const NUM_REPOS_TO_ANALYZE = 20
-// const USERNAME = 'jessestuart'
+const NUM_REPOS_TO_ANALYZE = 30
 const QUERY_PARAMS = {
   params: {
     page: 1,

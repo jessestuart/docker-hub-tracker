@@ -1,4 +1,3 @@
-import async from 'async'
 import AWS from 'aws-sdk'
 import _ from 'lodash'
 
@@ -13,7 +12,7 @@ export const popuplateDynamoWithQueryResults = ({
 }: {
   topRepos: RepositoryDetails[]
 }): void => {
-  async.map(topRepos, (repo: RepositoryDetails) => {
+  topRepos.map(async (repo: RepositoryDetails) => {
     const { description, last_updated, name, pull_count, star_count } = repo
 
     const isDescriptionAvailable = !_.isEmpty(description)

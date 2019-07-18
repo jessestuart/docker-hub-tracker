@@ -32,7 +32,7 @@ workflows:
 # ====================
 docker_image: &docker_image
   docker:
-    - image: circleci/node:12
+    - image: node:12-alpine
   working_directory: /home/circleci/project/
 
 restore_cache: &restore_cache
@@ -50,7 +50,7 @@ save_cache: &save_cache
 install_dependencies: &install_dependencies
   run:
     name: Install dependencies.
-    command: yarn -s --no-progress --frozen-lockfile
+    command: yarn --silent --no-progress --frozen-lockfile
 
 # ================
 # JOB DECLARATIONS

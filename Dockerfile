@@ -1,19 +1,21 @@
-FROM node:12-alpine
+FROM node:12-alpine as builder
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+COPY . .
 
 RUN \
   yarn --silent --no-progress --frozen-lockfile && \
   yarn build
 
 FROM node:12-alpine
-COPY . .
+WORKDIR /app
+COPY package.json yarn.lock /app/
+COPY --from=builder dist/ /app/dist/
 RUN \
   yarn --silent --prod && \
   yarn cache clean
 
 EXPOSE 3000
 ENTRYPOINT ["node"]
-CMD ["./src/index.js"]
+CMD ["./dist/index.js"]

@@ -1,4 +1,6 @@
 {
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**", "**/*.spec.ts"],
   "compilerOptions": {
     // Target latest version of ECMAScript.
     "target": "esnext",
@@ -30,7 +32,5 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "strictNullChecks": true
-  },
-  "include": ["./src/*.ts", "./src/**/*.ts"],
-  "exclude": ["node_modules/**", "**/*.spec.ts"]
+  }
 }

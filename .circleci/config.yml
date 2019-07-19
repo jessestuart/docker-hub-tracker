@@ -14,14 +14,14 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-      - test:
-          requires:
-            - install_dependencies
+      # - test:
+      #     requires:
+      #       - install_dependencies
       - release:
           requires:
             - build
             - lint
-            - test
+            # - test
           filters:
             branches:
               only:
@@ -96,6 +96,8 @@ jobs:
       - run:
           name: Compile type definitions.
           command: yarn ts:defs
+      - store_artifacts:
+          path: /home/circleci/project/dist
 
   release:
     <<: *docker_image

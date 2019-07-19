@@ -8,6 +8,7 @@ workflows:
   main:
     jobs:
       - install_dependencies
+      - build_image
       - build:
           requires:
             - install_dependencies
@@ -32,7 +33,7 @@ workflows:
 # ====================
 docker_image: &docker_image
   docker:
-    - image: circleci/node:12
+    - image: node:12
   working_directory: /home/circleci/project/
 
 restore_cache: &restore_cache
@@ -50,7 +51,7 @@ save_cache: &save_cache
 install_dependencies: &install_dependencies
   run:
     name: Install dependencies.
-    command: yarn -s --no-progress --frozen-lockfile
+    command: yarn --silent --no-progress --frozen-lockfile
 
 # ================
 # JOB DECLARATIONS
@@ -93,8 +94,22 @@ jobs:
       - run:
           name: Transpile sources.
           command: yarn build
-      - store_artifacts:
-          path: /home/circleci/project/dist
+
+  build_image:
+    docker:
+      - image: docker:stable-git
+    working_directory: /home/circleci/project/
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install build dependencies.
+          command: apk add --no-cache bash curl jq
+      - run:
+          command: .circleci/load_env.sh
+      - run:
+          command: .circleci/build_image.sh
 
   release:
     <<: *docker_image

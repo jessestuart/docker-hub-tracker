@@ -1,7 +1,7 @@
 import { queryReposForUser } from './services/docker-hub'
 import { popuplateDynamoForRepo } from './services/dynamodb'
 
-const USERNAME = 'jessestuart'
+export const USERNAME = 'jessestuart'
 
 queryReposForUser({ username: USERNAME })
   .then(({ topRepos }) => {

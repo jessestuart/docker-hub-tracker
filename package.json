@@ -3,6 +3,7 @@
   "description": "A minimal, type-safe API for querying top repos / total pulls for a user from Docker Hub.",
   "version": "0.0.1",
   "author": "Jesse Stuart <hi@jessestuart.com>",
+  "private": true,
   "bugs": {
     "url": "https://github.com/jessestuart/ts-docker-hub/issues"
   },

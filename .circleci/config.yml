@@ -22,6 +22,7 @@ workflows:
           requires:
             - build
             - lint
+            - build_image
             # - test
           filters:
             branches:

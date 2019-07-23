@@ -16,5 +16,7 @@ RUN \
   yarn --silent --prod && \
   yarn cache clean
 
+ENV AWS_ACCESS_KEY_ID ''
+ENV AWS_SECRET_ACCESS_KEY ''
 ENTRYPOINT ["node"]
 CMD ["./dist/index.js"]

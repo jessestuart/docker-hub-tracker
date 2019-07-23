@@ -1,7 +1,7 @@
 {
   "name": "@jesses/docker-hub-tracker",
   "description": "A minimal, type-safe API for querying top repos / total pulls for a user from Docker Hub.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Jesse Stuart <hi@jessestuart.com>",
   "bugs": {
     "url": "https://github.com/jessestuart/ts-docker-hub/issues"

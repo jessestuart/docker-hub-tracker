@@ -17,7 +17,9 @@ export interface DHStatsReponse {
   totalPulls: number
 }
 
-export const queryReposForUser = async ({ username }): Promise<any> => {
+export const queryReposForUser = async ({
+  username,
+}): Promise<DHStatsReponse> => {
   const repos = await axios.get(
     `https://hub.docker.com/v2/repositories/${username}`,
     QUERY_PARAMS,

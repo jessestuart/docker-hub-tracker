@@ -25,7 +25,7 @@
     "@semantic-release/git": "7.0.16",
     "@types/axios": "0.14.0",
     "@types/jest": "24.0.18",
-    "@types/lodash": "4.14.137",
+    "@types/lodash": "4.14.138",
     "@types/luxon": "1.15.2",
     "@types/node": "12.7.2",
     "@types/pino": "5.8.9",

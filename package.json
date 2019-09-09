@@ -7,7 +7,7 @@
     "url": "https://github.com/jessestuart/ts-docker-hub/issues"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb-node": "0.1.0-preview.4",
+    "@aws-sdk/client-dynamodb-node": "0.1.0-preview.5",
     "@babel/runtime": "7.6.0",
     "axios": "0.19.0",
     "lodash": "4.17.15",
